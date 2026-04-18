@@ -51,6 +51,15 @@ object Build : BuildType({
             runnerArgs = "-Dmaven.test.failure.ignore=true"
             userSettingsSelection = "settings.xml"
         }
+        maven {
+            name = "Maven test (feature branches)"
+            id = "Maven2_1"
+
+            conditions {
+                doesNotEqual("teamcity.build.branch", "master")
+            }
+            goals = "clean test"
+        }
     }
 
     triggers {
