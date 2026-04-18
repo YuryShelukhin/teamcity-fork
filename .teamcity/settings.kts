@@ -43,6 +43,10 @@ object Build : BuildType({
         maven {
             name = "Maven deploy (master only)"
             id = "Maven2"
+
+            conditions {
+                doesNotContain("teamcity.build.branch", "master")
+            }
             goals = "clean deploy"
             runnerArgs = "-Dmaven.test.failure.ignore=true"
             userSettingsSelection = "settings.xml"
